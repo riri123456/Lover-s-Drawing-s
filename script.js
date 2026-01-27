@@ -81,7 +81,7 @@ document.getElementById("clearBtn").onclick = async () => {
   document.getElementById("status").innerText = "Canvas cleared ✨";
 
   // Delete saved drawing
-  await db.collection("drawings").doc("shared").delete();
+  //await db.collection("drawings").doc("shared").delete();
 };
 
   
