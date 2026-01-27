@@ -74,11 +74,16 @@ const firebaseConfig = {
   };
 
 // 🧹 Clear canvas button
-document.getElementById("clearBtn").onclick = () => {
-    console.log("Clear button pressed!");
-    ctx.clearRect(0, 0, canvas.width, canvas.height);
-    document.getElementById("status").innerText = "Canvas cleared ✨";
+document.getElementById("clearBtn").onclick = async () => {
+  ctx.clearRect(0, 0, canvas.width, canvas.height);
+  ctx.fillStyle = "#ffffff"; 
+  ctx.fillRect(0, 0, canvas.width, canvas.height);
+  document.getElementById("status").innerText = "Canvas cleared ✨";
+
+  // Delete saved drawing
+  await db.collection("drawings").doc("shared").delete();
 };
+
   
   // 📥 Load latest drawing
   async function loadDrawing() {
