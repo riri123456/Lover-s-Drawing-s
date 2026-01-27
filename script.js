@@ -48,9 +48,12 @@ const firebaseConfig = {
     ctx.stroke();
   }
   
-  function stopDraw() {
-    drawing = false;
-  }
+
+function stopDraw() {
+  drawing = false;
+  saveHistory();
+}
+
   
   canvas.addEventListener("mousedown", startDraw);
   canvas.addEventListener("mousemove", draw);
@@ -78,11 +81,57 @@ document.getElementById("clearBtn").onclick = async () => {
   ctx.clearRect(0, 0, canvas.width, canvas.height);
   ctx.fillStyle = "#ffffff"; 
   ctx.fillRect(0, 0, canvas.width, canvas.height);
+    saveHistory();
   document.getElementById("status").innerText = "Canvas cleared ✨";
 
   // Delete saved drawing
   //await db.collection("drawings").doc("shared").delete();
 };
+
+const history = [];
+let historyStep = -1;
+
+// Call this function **after every stroke**
+function saveHistory() {
+  // If we undo some steps and then draw again, remove future redo states
+  history.splice(historyStep + 1);
+  
+  // Save current canvas as data URL
+  history.push(canvas.toDataURL());
+  historyStep++;
+}
+
+// Undo function
+function undo() {
+  if (historyStep > 0) {
+    historyStep--;
+    let img = new Image();
+    img.src = history[historyStep];
+    img.onload = () => {
+      ctx.clearRect(0, 0, canvas.width, canvas.height);
+      ctx.drawImage(img, 0, 0);
+    };
+    document.getElementById("status").innerText = "Undid last stroke ✨";
+  }
+}
+
+// Redo function
+function redo() {
+  if (historyStep < history.length - 1) {
+    historyStep++;
+    let img = new Image();
+    img.src = history[historyStep];
+    img.onload = () => {
+      ctx.clearRect(0, 0, canvas.width, canvas.height);
+      ctx.drawImage(img, 0, 0);
+    };
+    document.getElementById("status").innerText = "Redid stroke ✨";
+  }
+}
+
+// Add event listeners for undo/redo buttons
+document.getElementById("undoBtn").onclick = undo;
+document.getElementById("redoBtn").onclick = redo;
 
   
   // 📥 Load latest drawing
