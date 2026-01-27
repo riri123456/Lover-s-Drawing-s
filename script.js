@@ -72,6 +72,12 @@ const firebaseConfig = {
   
     document.getElementById("status").innerText = "Saved 💙";
   };
+
+// 🧹 Clear canvas button
+document.getElementById("clearBtn").onclick = () => {
+  ctx.clearRect(0, 0, canvas.width, canvas.height);
+  document.getElementById("status").innerText = "Canvas cleared ✨";
+};
   
   // 📥 Load latest drawing
   async function loadDrawing() {
