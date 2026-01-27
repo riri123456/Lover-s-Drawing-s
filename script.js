@@ -51,7 +51,7 @@ const firebaseConfig = {
 
 function stopDraw() {
   drawing = false;
-  saveHistory();
+    saveHistory();
 }
 
   
