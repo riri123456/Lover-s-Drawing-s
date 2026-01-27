@@ -1,8 +1,11 @@
 // 🔥 Firebase config (YOU will replace this)
 const firebaseConfig = {
-    apiKey: "YOUR_API_KEY",
-    authDomain: "YOUR_PROJECT.firebaseapp.com",
-    projectId: "YOUR_PROJECT_ID",
+    apiKey: "AIzaSyAkPSp60QVHDaTS4_oSgJqyUjACKrP9iPc",
+    authDomain: "lover-s-drawings.firebaseapp.com",
+    projectId: "lover-s-drawings",
+    storageBucket: "lover-s-drawings.firebasestorage.app",
+    messagingSenderId: "214319920314",
+    appId: "1:214319920314:web:7c7613d238d5a9e11efe83"
   };
   
   firebase.initializeApp(firebaseConfig);
