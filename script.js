@@ -10,7 +10,14 @@ const firebaseConfig = {
   
   firebase.initializeApp(firebaseConfig);
   const db = firebase.firestore();
-  
+
+
+const auth = firebase.auth();
+
+auth.signInAnonymously().catch(err => {
+  console.error("Auth error:", err);
+});
+
   // 🎨 Canvas setup
   const canvas = document.getElementById("canvas");
   const ctx = canvas.getContext("2d");
