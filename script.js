@@ -12,11 +12,16 @@ const firebaseConfig = {
   const db = firebase.firestore();
 
 
-const auth = firebase.auth();
+cconst auth = firebase.auth();
 
-auth.signInAnonymously().catch(err => {
-  console.error("Auth error:", err);
-});
+auth.signInAnonymously()
+  .then(() => {
+    console.log("Signed in anonymously");
+  })
+  .catch(err => {
+    console.error("Auth error:", err);
+  });
+
 
   // 🎨 Canvas setup
   const canvas = document.getElementById("canvas");
